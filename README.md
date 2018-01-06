@@ -1,6 +1,6 @@
 # Conditional Blocks for Foliant
 
-This preprocessors lets you exclude parts of the source based on flags defined in the project config and environment variables.
+This preprocessors lets you exclude parts of the source based on flags defined in the project config and environment variables, as well as current target and backend.
 
 
 ## Installation
@@ -12,11 +12,18 @@ $ pip install foliantcontrib.flags
 
 ## Config
 
+Enable the propressor by adding it to `preprocessors`:
+
+```yaml
+preprocessors:
+  - flags
+```
+
 Enabled project flags are listed in `preprocessors.flags`:
 
 ```yaml
 preprocessors:
-  flags:
+  - flags:
     - foo
     - bar
 ```
@@ -28,6 +35,11 @@ $ FOLIANT_FLAGS="spam, eggs"
 ```
 
 You can use commas, semicolons, or spaces to separate flags.
+
+>   **Hint**
+>
+>   To emulate a particular target or backend with a flag, use the special flags `target:FLAG` and `backend:FLAG` where `FLAG` is your target or backend:
+>       $ FOLIANT_FLAGS="target:pdf, backend:pandoc, spam"
 
 
 ## Usage
@@ -60,4 +72,12 @@ You can also list flags that must *not* be set for the block to be included:
 <<if flags="spam, eggs" kind="none">
 This is included only if neither `spam` nor `eggs` are set.
 </if>
+```
+
+You can check against the current target and backend instead of manually defined flags:
+
+```markdown
+<<if targets="pdf">This is for pdf output</if><<if targets="site">This is for the site</if>
+
+<<if backends="mkdocs">This is only for MkDocs.</if>
 ```
