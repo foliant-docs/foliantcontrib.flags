@@ -27,17 +27,29 @@ class Preprocessor(BasePreprocessor):
 
             required_flags = {
                 flag.lower()
-                for flag in re.split(self._flag_delimiters, options['flags'])
+                for flag in re.split(self._flag_delimiters, options.get('flags', ''))
+                if flag
+            } | {
+                f'target:{target.lower()}'
+                for target in re.split(self._flag_delimiters, options.get('targets', ''))
+                if target
+            } | {
+                f'backend:{backend.lower()}'
+                for backend in re.split(self._flag_delimiters, options.get('backends', ''))
+                if backend
             }
 
             env_flags = {
                 flag.lower()
                 for flag in re.split(self._flag_delimiters, getenv(self._flags_envvar, ''))
+                if flag
             }
 
             config_flags = {flag.lower() for flag in self.options['flags']}
 
-            set_flags = env_flags | config_flags
+            set_flags = env_flags \
+                | config_flags \
+                | {f'target:{self.context["target"]}', f'backend:{self.context["backend"]}'}
 
             kind = options.get('kind', 'all')
 
