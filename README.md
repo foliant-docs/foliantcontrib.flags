@@ -39,6 +39,7 @@ You can use commas, semicolons, or spaces to separate flags.
 >   **Hint**
 >
 >   To emulate a particular target or backend with a flag, use the special flags `target:FLAG` and `backend:FLAG` where `FLAG` is your target or backend:
+>
 >       $ FOLIANT_FLAGS="target:pdf, backend:pandoc, spam"
 
 
