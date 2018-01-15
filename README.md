@@ -19,13 +19,14 @@ preprocessors:
   - flags
 ```
 
-Enabled project flags are listed in `preprocessors.flags`:
+Enabled project flags are listed in `preprocessors.flags.flags`:
 
 ```yaml
 preprocessors:
   - flags:
-    - foo
-    - bar
+      flags:
+        - foo
+        - bar
 ```
 
 To set flags for the current session, define `FOLIANT_FLAGS` environment variable:
