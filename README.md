@@ -1,3 +1,5 @@
+[![](https://img.shields.io/pypi/v/foliantcontrib.flags.svg)](https://pypi.org/project/foliantcontrib.flags/) [![](https://img.shields.io/github/v/tag/foliant-docs/foliantcontrib.flags.svg?label=GitHub)](https://github.com/foliant-docs/foliantcontrib.flags)
+
 # Conditional Blocks for Foliant
 
 This preprocessors lets you exclude parts of the source based on flags defined in the project config and environment variables, as well as current target and backend.
@@ -46,12 +48,12 @@ You can use commas, semicolons, or spaces to separate flags.
 
 ## Usage
 
-Conditional blocks are enclosed between `<<if>...</if>` tags:
+Conditional blocks are enclosed between `<if>...</if>` tags:
 
 ```markdown
 This paragraph is for everyone.
 
-<<if flags="management">
+<if flags="management">
 This parapraph is for management only.
 </if>
 ```
@@ -59,11 +61,11 @@ This parapraph is for management only.
 A block can depend on multiple flags. You can pick whether all tags must be present for the block to appear, or any of them (by default, `kind="all"` is assumed):
 
 ```markdown
-<<if flags="spam, eggs" kind="all">
+<if flags="spam, eggs" kind="all">
 This is included only if both `spam` and `eggs` are set.
 </if>
 
-<<if flags="spam, eggs" kind="any">
+<if flags="spam, eggs" kind="any">
 This is included if both `spam` or `eggs` is set.
 </if>
 ```
@@ -71,7 +73,7 @@ This is included if both `spam` or `eggs` is set.
 You can also list flags that must *not* be set for the block to be included:
 
 ```markdown
-<<if flags="spam, eggs" kind="none">
+<if flags="spam, eggs" kind="none">
 This is included only if neither `spam` nor `eggs` are set.
 </if>
 ```
@@ -79,7 +81,7 @@ This is included only if neither `spam` nor `eggs` are set.
 You can check against the current target and backend instead of manually defined flags:
 
 ```markdown
-<<if targets="pdf">This is for pdf output</if><<if targets="site">This is for the site</if>
+<if targets="pdf">This is for pdf output</if><if targets="site">This is for the site</if>
 
-<<if backends="mkdocs">This is only for MkDocs.</if>
+<if backends="mkdocs">This is only for MkDocs.</if>
 ```
